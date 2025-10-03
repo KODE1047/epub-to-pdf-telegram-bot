@@ -9,3 +9,6 @@ xhtml2pdf
 
 # Environment Variable Management
 python-dotenv
+
+# HTML Parsing for image embedding
+beautifulsoup4
