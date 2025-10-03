@@ -1,0 +1,11 @@
+# Telegram Bot Framework
+python-telegram-bot>=20.0
+
+# EPUB Parsing
+EbookLib
+
+# PDF Generation
+xhtml2pdf
+
+# Environment Variable Management
+python-dotenv
