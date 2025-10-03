@@ -48,13 +48,14 @@ async def handle_document(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         return
 
     # 2. --- File Size Validation ---
-    is_admin = user_id in config.ADMIN_IDS
-    if not is_admin and document.file_size > config.MAX_FILE_SIZE_BYTES:
-        await update.message.reply_text(
-            f"❌ File is too large ({document.file_size / 1024 / 1024:.2f} MB). "
-            f"The maximum size for standard users is {config.MAX_FILE_SIZE_MB} MB."
-        )
-        return
+    if document.file_size > config.MAX_FILE_SIZE_BYTES:
+        is_admin = user_id in config.ADMIN_IDS
+        if not is_admin:
+            await update.message.reply_text(
+                f"❌ File is too large ({document.file_size / 1024 / 1024:.2f} MB). "
+                f"The maximum size for standard users is {config.MAX_FILE_SIZE_MB} MB."
+            )
+            return
 
     # 3. --- Conversion Process ---
     status_message = await update.message.reply_text("📥 Downloading and processing your file... Please wait.")

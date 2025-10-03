@@ -17,8 +17,18 @@ def _extract_and_embed_images(book: epub.EpubBook) -> str:
     css = """
     <style>
         @media print {
-            .page-break { page-break-after: always; }
-            img { max-width: 100%; height: auto; }
+            body {
+                font-family: Georgia, serif;
+                font-size: 12pt;
+                line-height: 1.5;
+            }
+            .page-break { 
+                page-break-after: always; 
+            }
+            img { 
+                max-width: 100%; 
+                height: auto; 
+            }
         }
     </style>
     """
@@ -32,16 +42,13 @@ def _extract_and_embed_images(book: epub.EpubBook) -> str:
 
         for img_tag in soup.find_all('img'):
             src = img_tag.get('src')
-            # Normalize path for lookup
             normalized_src = os.path.basename(src)
             
             if src and (src in images or normalized_src in images):
-                # Try original src first, then normalized basename
                 image_item = images.get(src) or images.get(normalized_src)
                 if not image_item:
                     continue
                     
-                # --- THIS IS THE CORRECTED LINE ---
                 mime_type = image_item.media_type
                 image_data = image_item.get_content()
                 
