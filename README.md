@@ -39,8 +39,8 @@ Follow these steps to get your bot running.
 Clone this project to your local machine or server.
 
 ```bash
-git clone <your-repository-url>
-cd epub-to-pdf-bot
+git clone https://github.com/KODE1047/epub-to-pdf-telegram-bot.git
+cd epub-to-pdf-telegram-bot
 ```
 
 ### 3. Install Dependencies
